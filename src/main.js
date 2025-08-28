@@ -5,7 +5,11 @@ import {
   updateUserEmail,
   deleteUser,
 } from "./concepts/basic-queries.js";
-import { getUsersWhere, getSortedUsers } from "./concepts/filtering-sorting.js";
+import {
+  getUsersWhere,
+  getSortedUsers,
+  getPaginatedUsers,
+} from "./concepts/filtering-sorting.js";
 
 async function testBasicQueries(params) {
   try {
@@ -26,10 +30,13 @@ async function testBasicQueries(params) {
 async function testFilterAndSortQueries(params) {
   try {
     //get all users whose name starts with J
-    const filteredNames = await getUsersWhere("username LIKE 'J%'");
-    console.log("Filtered names starting with J", filteredNames);
-    const sortedUsers = await getSortedUsers("created_at", "DESC");
-    console.log("SORTED USERS---", sortedUsers);
+    // const filteredNames = await getUsersWhere("username LIKE 'J%'");
+    // console.log("Filtered names starting with J", filteredNames);
+    // const sortedUsers = await getSortedUsers("created_at", "DESC");
+    // console.log("SORTED USERS---", sortedUsers);
+    const paginatedUsers = await getPaginatedUsers(2, 0);
+
+    console.log("fetch 1st 2 users based on paginated users", paginatedUsers);
   } catch (e) {
     console.log("Error in main file filter", e);
   }

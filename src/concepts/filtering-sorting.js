@@ -23,3 +23,15 @@ export async function getSortedUsers(column, order = "ASC") {
     console.log("error while applying sort condition", error);
   }
 }
+
+export async function getPaginatedUsers(limit, offset) {
+  const getPaginatedQuery = `SELECT * FROM users
+    LIMIT $1 OFFSET $2`;
+
+  try {
+    const result = await query(getPaginatedQuery, [limit, offset]);
+    return result;
+  } catch (e) {
+    console.log("Error when doing pagination");
+  }
+}
